@@ -100,5 +100,25 @@ namespace RijndaelManagedBugTest
 
             return dms.ToArray();
         }
+
+        public static string EncryptString(string plainText, string secret, byte[] salt)
+        {
+            return Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(plainText), secret, salt));
+        }
+
+        public static string DecryptString(string cipherText, string secret, byte[] salt)
+        {
+            return Encoding.UTF8.GetString(Decrypt(Convert.FromBase64String(cipherText), secret, salt));
+        }
+
+        public static string EncryptString(string plainText, string secret)
+        {
+            return Convert.ToBase64String(Encrypt(Encoding.UTF8.GetBytes(plainText), secret));
+        }
+
+        public static string DecryptString(string cipherText, string secret)
+        {
+            return Encoding.UTF8.GetString(Decrypt(Convert.FromBase64String(cipherText), secret));
+        }
     }
 }
